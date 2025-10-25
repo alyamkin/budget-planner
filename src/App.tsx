@@ -1,7 +1,14 @@
+import PeriodSelector from './components/PeriodSelector';
+
 function App() {
   return (
     <>
-      <p>App</p>
+      <PeriodSelector
+        selected={'Daily'}
+        onChange={(selected) => {
+          console.log(selected);
+        }}
+      />
     </>
   );
 }
