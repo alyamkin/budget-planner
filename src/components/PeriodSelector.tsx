@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { Period } from '@/shared/types';
 
 interface Options {
@@ -18,23 +17,25 @@ const options: Options[] = [
 ];
 
 interface PeriodSelectorProps {
+  id: string;
   selected: Period;
   onChange: (period: Period) => void;
 }
 
-const PeriodSelector = ({ selected, onChange }: PeriodSelectorProps) => {
-  const [selectedValue, setSelectedValue] = useState<Period>(selected);
-
+const PeriodSelector = ({ id, selected, onChange }: PeriodSelectorProps) => {
   const handleSelectedChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    const selected = event?.target.value as Period;
-    setSelectedValue(selected);
-    onChange(selected);
+    onChange(event?.target.value as Period);
   };
 
   return (
-    <select value={selectedValue} onChange={handleSelectedChange}>
+    <select
+      id={`${id}-period`}
+      className="w-full border-b border-gray-300 focus:border-gray-500 pb-1 outline-0"
+      value={selected}
+      onChange={handleSelectedChange}
+    >
       {options.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}
